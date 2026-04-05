@@ -1,5 +1,5 @@
 class Player {
-  Float speed = 1f;
+  Float speed = 10f;
   PVector position;
   PVector input;
 
