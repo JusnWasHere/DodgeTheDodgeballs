@@ -45,11 +45,12 @@ void draw() {
   }
   
   if(lost){
+    textAlign(CENTER, CENTER);
     fill(255, 0, 0);
     textSize(150);
     text("GAME OVER", width/2, height/2);
-    textSize(100);
-    text("Press r to restart", (width/2), (height/2)+50);
+    textSize(50);
+    text("Press r to restart", width/2, (height/2)+120);
   }
   
 }
