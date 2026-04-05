@@ -6,7 +6,7 @@ class Dodgeball {
   Float speed;
   Boolean isSuper = false;
 
-  Dodgeball(float s, PVector playerPosition, boolean superBall) {
+  Dodgeball(int s, PVector playerPosition, boolean superBall) {
     isSuper = superBall;
     direction = new PVector(0, 0);
     velocity = new PVector(0, 0);

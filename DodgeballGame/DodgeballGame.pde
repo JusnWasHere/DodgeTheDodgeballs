@@ -19,6 +19,8 @@ void setup() {
   fullScreen();
   background(255);
   player = new Player(width/2, height/2);
+  
+  balls = new ArrayList<Dodgeball>();
 }
 
 void draw() {
@@ -32,10 +34,10 @@ void draw() {
     spawnTimer = 0;
   }
   
-  for (int i = 0; i < balls.size(); i++) {//for each fired arrow
+  for (int i = 0; i < balls.size(); i++) {
     Dodgeball b = balls.get(i);
-    b.move();//apply the physics to the arrow
-    b.display();//continue to draw the arrow at each new position
+    b.move();
+    b.display();
     if(b.ballHit(player.position.x, player.position.y, b.position.x, b.position.y)){
       playing = false;
       lost = true;
@@ -53,7 +55,7 @@ void draw() {
 }
 
 void spawnDodgeBall(){
-  float side = random(3);
+  int side = floor(random(4));
   ball = new Dodgeball(side, player.position, false);
   balls.add(ball);
   
