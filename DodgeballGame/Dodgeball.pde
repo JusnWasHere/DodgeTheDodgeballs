@@ -32,18 +32,29 @@ class Dodgeball {
     velocity = PVector.mult(direction, speed);
     acceleration = PVector.mult(direction, 0.1);
   }
-  
-  void move(){
+
+  void move() {
     velocity.add(acceleration);
     position.add(velocity);
   }
-  
-  void display(){
-    fill(255,0,0);
-    ellipse(position.x,position.y,20,20);
+
+  void display() {
+    if (isSuper) {
+      fill(0, 0, 255);
+      ellipse(position.x, position.y, 30, 30);
+    } else {
+      fill(255, 0, 0);
+      ellipse(position.x, position.y, 20, 20);
+    }
   }
-  
-  boolean ballHit(float pX, float pY, float bX, float bY){
+
+  boolean offScreen() {
+    if (position.x < -80 || position.x > width + 80 || position.y < -80 || position.y > height + 80)
+      return true;// if it is the boolean is true
+    return false;
+  }
+
+  boolean ballHit(float pX, float pY, float bX, float bY) {
     return dist(pX, pY, bX, bY) <= 20;
   }
 }

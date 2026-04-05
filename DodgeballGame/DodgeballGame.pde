@@ -15,36 +15,58 @@ boolean playing = true;
 boolean won = false;
 boolean lost = false;
 
+int timerLength=7200;
+int timerValue = 0;
+
 void setup() {
   fullScreen();
   background(255);
   player = new Player(width/2, height/2);
-  
+
   balls = new ArrayList<Dodgeball>();
 }
 
 void draw() {
-  background(255);
-  player.move();
-  player.display();
-  
-  spawnTimer += 1;
-  if(spawnTimer >= spawnCooldown){
-    spawnDodgeBall();
-    spawnTimer = 0;
-  }
-  
-  for (int i = 0; i < balls.size(); i++) {
-    Dodgeball b = balls.get(i);
-    b.move();
-    b.display();
-    if(b.ballHit(player.position.x, player.position.y, b.position.x, b.position.y)){
+  if (playing) {
+    background(255);
+    player.move();
+    player.display();
+
+    if (playing)
+      timerValue+=1;
+
+    if (timerValue>=timerLength) {
       playing = false;
-      lost = true;
+      won = true;
+    }
+
+    spawnTimer += 1;
+    if (spawnTimer >= spawnCooldown) {
+      spawnDodgeball();
+      spawnTimer = 0;
+    }
+
+    if (timerValue%600==0) {
+      spawnSuperDodgeball();
+      spawnCooldown-=10;
+    }
+
+    for (int i = 0; i < balls.size(); i++) {
+      Dodgeball b = balls.get(i);
+      b.move();
+      b.display();
+      if(b.offScreen()){
+        balls.remove(i);
+      }
+      if (b.ballHit(player.position.x, player.position.y, b.position.x, b.position.y)) {
+        playing = false;
+        lost = true;
+      }
     }
   }
-  
-  if(lost){
+
+
+  if (lost) {
     textAlign(CENTER, CENTER);
     fill(255, 0, 0);
     textSize(150);
@@ -52,13 +74,36 @@ void draw() {
     textSize(50);
     text("Press r to restart", width/2, (height/2)+120);
   }
-  
+
+  if (won) {
+    textAlign(CENTER, CENTER);
+    fill(0, 255, 0);
+    textSize(150);
+    text("YOU WIN", width/2, height/2);
+    textSize(50);
+    text("Press r to restart", width/2, (height/2)+120);
+  }
 }
 
-void spawnDodgeBall(){
+void spawnDodgeball() {
   int side = floor(random(4));
   ball = new Dodgeball(side, player.position, false);
   balls.add(ball);
+}
+
+void spawnSuperDodgeball() {
+  int side = floor(random(4));
+  ball = new Dodgeball(side, player.position, true);
+  balls.add(ball);
+}
+
+void restartGame(){
+  won = false;
+  lost = false;
+  playing = true;
+  spawnCooldown = 60;
+  timerValue = 0;
+  balls.clear();
   
 }
 
@@ -71,14 +116,13 @@ void keyPressed() {
     Down = true;
   if (key == 'd' || key == 'D')
     Right = true;
-    
-  if(key == 'r' || key == 'R' && lost || won){
-    //restartGame();
+
+  if (key == 'r' || key == 'R' && lost || won) {
+    restartGame();
   }
-  
 }
 
-void keyReleased(){
+void keyReleased() {
   if (key == 'w' || key == 'W')
     Up = false;
   if (key == 'a' || key == 'A')
