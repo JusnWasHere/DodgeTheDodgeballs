@@ -1,5 +1,5 @@
 class Player {
-  Float speed = 10f;
+  Float speed = 1f;
   PVector position;
   PVector input;
 
@@ -9,6 +9,7 @@ class Player {
   }
   
   void move(){
+    input.set(0,0);
     if(Up)
       input.y -= 1;
     if(Left)
@@ -20,9 +21,6 @@ class Player {
     
     input.normalize();
     position.add(input.mult(speed));
-    
-    if(!Left && !Right && !Up && !Down)
-      input.set(0,0);
   }
   
   void display(){
