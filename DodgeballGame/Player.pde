@@ -2,10 +2,14 @@ class Player {
   Float speed = 10f;
   PVector position;
   PVector input;
+  
+  PImage playerAvatar;
 
   Player(float x, float y) {
     position = new PVector(x, y);
     input = new PVector(x, y);
+    imageMode(CENTER);
+    playerAvatar = loadImage("playerAvatar.png");
   }
 
   void move() {
@@ -27,7 +31,6 @@ class Player {
   }
 
   void display() {
-    fill(0);
-    ellipse(position.x, position.y, 15, 15);
+    image(playerAvatar, position.x, position.y);
   }
 }

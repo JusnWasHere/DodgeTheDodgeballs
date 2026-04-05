@@ -39,12 +39,13 @@ class Dodgeball {
   }
 
   void display() {
+    strokeWeight(0.5);
     if (isSuper) {
       fill(0, 0, 255);
-      ellipse(position.x, position.y, 30, 30);
+      h.ellipse(position.x, position.y, 40, 40);
     } else {
       fill(255, 0, 0);
-      ellipse(position.x, position.y, 20, 20);
+      h.ellipse(position.x, position.y, 30, 30);
     }
   }
 
@@ -55,6 +56,6 @@ class Dodgeball {
   }
 
   boolean ballHit(float pX, float pY, float bX, float bY) {
-    return dist(pX, pY, bX, bY) <= 20;
+    return dist(pX, pY, bX, bY) <= 30;
   }
 }
