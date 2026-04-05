@@ -3,7 +3,17 @@ boolean Left = false;
 boolean Down = false;
 boolean Right = false;
 
+ArrayList<Dodgeball> balls;
+Dodgeball ball;
+
 Player player;
+
+int spawnCooldown = 60;
+int spawnTimer = 0;
+
+boolean playing = true;
+boolean won = false;
+boolean lost = false;
 
 void setup() {
   fullScreen();
@@ -15,6 +25,38 @@ void draw() {
   background(255);
   player.move();
   player.display();
+  
+  spawnTimer += 1;
+  if(spawnTimer >= spawnCooldown){
+    spawnDodgeBall();
+    spawnTimer = 0;
+  }
+  
+  for (int i = 0; i < balls.size(); i++) {//for each fired arrow
+    Dodgeball b = balls.get(i);
+    b.move();//apply the physics to the arrow
+    b.display();//continue to draw the arrow at each new position
+    if(b.ballHit(player.position.x, player.position.y, b.position.x, b.position.y)){
+      playing = false;
+      lost = true;
+    }
+  }
+  
+  if(lost){
+    fill(255, 0, 0);
+    textSize(150);
+    text("GAME OVER", width/2, height/2);
+    textSize(100);
+    text("Press r to restart", (width/2), (height/2)+50);
+  }
+  
+}
+
+void spawnDodgeBall(){
+  float side = random(3);
+  ball = new Dodgeball(side, player.position, false);
+  balls.add(ball);
+  
 }
 
 void keyPressed() {
@@ -26,6 +68,11 @@ void keyPressed() {
     Down = true;
   if (key == 'd' || key == 'D')
     Right = true;
+    
+  if(key == 'r' || key == 'R' && lost || won){
+    //restartGame();
+  }
+  
 }
 
 void keyReleased(){
