@@ -39,13 +39,13 @@ class Dodgeball {
   }
 
   void display() {
-    strokeWeight(0.5);
+    //strokeWeight(0.5);
     if (isSuper) {
       fill(0, 0, 255);
-      h.ellipse(position.x, position.y, 40, 40);
+      ellipse(position.x, position.y, 40, 40);
     } else {
       fill(255, 0, 0);
-      h.ellipse(position.x, position.y, 30, 30);
+      ellipse(position.x, position.y, 30, 30);
     }
   }
 

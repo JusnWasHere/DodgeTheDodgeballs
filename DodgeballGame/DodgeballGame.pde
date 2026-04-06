@@ -1,6 +1,6 @@
-import org.gicentre.handy.*;
+//import org.gicentre.handy.*;
 
-HandyRenderer h;
+//HandyRenderer h;
 
 boolean Up = false;
 boolean Left = false;
@@ -25,14 +25,14 @@ int timerValue = 0;
 void setup() {
   fullScreen();
   background(255);
-  h = new HandyRenderer(this);
+  //h = new HandyRenderer(this);
   player = new Player(width/2, height/2);
 
   balls = new ArrayList<Dodgeball>();
 }
 
 void draw() {
-  h.setSeed(1234);
+  //h.setSeed(1234);
   
   if (playing) {
     background(255);

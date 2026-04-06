@@ -7,9 +7,10 @@ class Player {
 
   Player(float x, float y) {
     position = new PVector(x, y);
-    input = new PVector(x, y);
+    input = new PVector(0, 0);
     imageMode(CENTER);
-    playerAvatar = loadImage("playerAvatar.png");
+    playerAvatar = loadImage("playerAvatar.jpeg");
+    playerAvatar.resize(0, 80);
   }
 
   void move() {
@@ -32,5 +33,7 @@ class Player {
 
   void display() {
     image(playerAvatar, position.x, position.y);
+    //fill(0);
+    //ellipse(position.x, position.y, 30,30);
   }
 }
