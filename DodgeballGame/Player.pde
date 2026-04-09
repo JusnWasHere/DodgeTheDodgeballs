@@ -33,7 +33,5 @@ class Player {
 
   void display() {
     image(playerAvatar, position.x, position.y);
-    //fill(0);
-    //ellipse(position.x, position.y, 30,30);
   }
 }

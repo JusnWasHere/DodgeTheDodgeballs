@@ -41,7 +41,7 @@ class Dodgeball {
   void display() {
     //strokeWeight(0.5);
     if (isSuper) {
-      fill(0, 0, 255);
+      fill(139, 0, 0);
       ellipse(position.x, position.y, 40, 40);
     } else {
       fill(255, 0, 0);
